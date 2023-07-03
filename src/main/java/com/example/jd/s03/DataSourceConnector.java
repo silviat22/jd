@@ -15,7 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.example.jd.Config;
-
+//i data source li vado a prendere dal config
 /**
  * A Hello JDBC by data source
  */
@@ -27,14 +27,14 @@ public class DataSourceConnector {
      * 
      * @param args not used
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) { //dimmi qual è il data source x lavorarci su
         log.trace("Connecting ...");
-        DataSource ds = Config.getDataSource();
+        DataSource ds = Config.getDataSource(); //crea oggetto data source
 
-        try (Connection conn = ds.getConnection()) {
-            DatabaseMetaData dmd = conn.getMetaData();
+        try (Connection conn = ds.getConnection()) { //try with resources x connettere l'oggetto data source e lavorarci col database
+            DatabaseMetaData dmd = conn.getMetaData(); //metadata: info su database, vedi giù
 
-            String db = dmd.getDatabaseProductName();
+            String db = dmd.getDatabaseProductName(); 
             String version = dmd.getDatabaseProductVersion();
 
             String catalog = conn.getCatalog();

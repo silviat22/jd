@@ -14,6 +14,7 @@ import com.example.jd.s14.dao.CoderDao;
 /**
  * Sample application using DAO
  */
+//la freccia vuol dire: a dx c'è il body che viene eseguito correlato a quello che c'è nel metodo. Indica una funzione anonima
 public class Main {
     private static final Logger log = LogManager.getLogger(Main.class);
 
@@ -25,7 +26,7 @@ public class Main {
         cd.save(new Coder(id, "Tom", "Jones", 99_999, 2_000));
 
         // ... then get it
-        cd.get(id).ifPresentOrElse(coder -> {
+        cd.get(id).ifPresentOrElse(coder -> { //prendi reference cd, invoca metodo get su id e su cd (?) dopo la condizione if, si passa una funzione (metodo) (alla funzione precedente)
             System.out.println("Get: " + coder);
 
             // update coder salary

@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 /**
  * From PreparedStatement to ResultSet to List of JavaBean
  */
-public class PreparedSelector {
+public class PreparedSelector { //? = argomenti attesi
     private static final Logger log = LogManager.getLogger(PreparedSelector.class);
 
     private static final String GET_CODERS_BY_SALARY = """
@@ -48,14 +48,15 @@ public class PreparedSelector {
     public List<Coder> getCodersHiredBefore(LocalDate limit) throws SQLException {
         try (Connection conn = ds.getConnection();
                 PreparedStatement prepStmt = conn.prepareStatement(GET_CODERS_HIRED_BEFORE)) {
-            prepStmt.setObject(1, limit);
+            prepStmt.setObject(1, limit); //setObject intrrodotto recentemente per evitare di scrivere tutti gli oggetti da inserire 1 a 1 (es. str o date)
 
             // not supported by Oracle JDBC
             log.debug("PreparedStatement: {}", prepStmt);
 
             List<Coder> result = new ArrayList<>();
+            //c'è un altro try w/resources perché c'è setobject per preparare lo stmt e si spezza in 2
             try (ResultSet rs = prepStmt.executeQuery()) {
-                while (rs.next()) {
+                while (rs.next()) { //leggere result set colonna x colonna
                     Coder coder = new Coder(rs.getString(1), rs.getString(2), rs.getObject(3, LocalDate.class),
                             rs.getInt(4));
                     result.add(coder);

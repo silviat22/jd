@@ -21,20 +21,27 @@ import com.example.jd.Config;
  */
 public class InserterExercise {
     private static final Logger log = LogManager.getLogger(InserterExercise.class);
+    // private static final String INSERT_SERVICE_BY_NAME_AND_LOCATION = null;
 
     // TODO: SQL code for insert
-//    private static final String INSERT_SERVICE_BY_NAME_AND_LOCATION = "";
+    private static final String INSERT_SERVICE_BY_NAME_AND_LOCATION = //
+            "insert into service (name, location_id) values ('%s', %s);";
 
     public static void main(String[] args) {
-        if (args.length != 2) {
+        if (args.length != 2) { // solamente 2 args, service e location
             System.out.println("Pass me a service name and its location!");
             return;
         }
 
         DataSource ds = Config.getDataSource();
         try (Connection conn = ds.getConnection(); //
-                Statement stmt = conn.createStatement()) {
-            // TODO: execute statement
+                Statement stmt = conn.createStatement()) { // ogg Java in cui metto codice SQL per eseguirlo
+            // metodo format varargs, : str di partenza che verrà formattata, con
+            // placeholder (%s: stringa ecc)( che verranno sostituiti da args 0/1
+            String sql = String.format(INSERT_SERVICE_BY_NAME_AND_LOCATION, args[0], args[1]);
+            int lines = stmt.executeUpdate(sql); // metodo x eseguire statement: lo manda sulla connessione al database,
+                                                 // il db fa qualcosa e torna a JDBC che esegue il tutto
+            System.out.printf("Insert executed, %d lines affected%n", lines);
         } catch (SQLException se) {
             log.fatal("Can't insert", se);
         }

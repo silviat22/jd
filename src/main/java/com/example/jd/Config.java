@@ -52,10 +52,10 @@ public final class Config {
     private static final Dbms ACTIVE;
     private static final DataSource DS;
 
-    private Config() {
+    private Config() { //scrivere file di configurazione tra database e eclipse???
     }
-
-    static {
+//inizializzazione da inizializzatore statico, connettere al database
+    static { 
         String dbmsName = "h2";
         String url = "jdbc:h2:./hron";
         String user = "hron";
@@ -64,7 +64,7 @@ public final class Config {
         try (InputStream is = Config.class.getClassLoader().getResourceAsStream("configuration.properties")) {
             Properties prop = new Properties();
             prop.load(is);
-
+// leggere la chiave e mettere valori associati
             dbmsName = prop.getProperty("dbms.name");
             url = prop.getProperty("dbms.url");
             user = prop.getProperty("dbms.user");
@@ -137,7 +137,7 @@ public final class Config {
     }
 
     static public DataSource getDataSource() {
-        return DS;
+        return DS; //data source creato in config
     }
 
     public static boolean isH2() {

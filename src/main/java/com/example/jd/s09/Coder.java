@@ -10,6 +10,7 @@ import java.util.Objects;
 
 /**
  * Another JavaBean for coders from the EMPLOYEE table
+ * questa classe è un DTO: data transfer object, serve per portare dati in giro, faccio fuori il result set, trasformare dati in Java Bean e si distribuiscono
  */
 public class Coder {
     private String firstName;

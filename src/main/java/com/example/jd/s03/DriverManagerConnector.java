@@ -28,9 +28,9 @@ public class DriverManagerConnector {
      * 
      * @param args not used
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) { //classe con metodo statico getConnection
         log.trace("Connecting ... (legacy)");
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);) {
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);) { //meno sicuro e + macchinoso perchè bisogna inserire url, username e password
             DatabaseMetaData dmd = conn.getMetaData();
 
             String db = dmd.getDatabaseProductName();

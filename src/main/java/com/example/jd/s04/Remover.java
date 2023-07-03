@@ -23,7 +23,7 @@ public class Remover {
     private static final Logger log = LogManager.getLogger(Remover.class);
     private static final String DELETE_SERVICE_BY_NAME = """
             DELETE FROM service
-            WHERE name = '%s'""";
+            WHERE name = '%s'"""; //metodo format di stringa, apici singoli x stringa, tripli x andare a capo
 
     /**
      * Remove the service whose name is passed by the user
@@ -36,10 +36,10 @@ public class Remover {
             return;
         }
 
-        log.info("Deleting service named {}, if exists", args[0]);
+        log.info("Deleting service named {}, if exists", args[0]); // parentesi graffe è placeholder, sostituite da args[0]
 
         DataSource ds = Config.getDataSource();
-        try (Connection conn = ds.getConnection(); //
+        try (Connection conn = ds.getConnection(); //se il reference conn è buono, crea connessione
                 Statement stmt = conn.createStatement()) {
             // !!! DANGER - POSSIBLE SQL INJECTION ATTACK !!!
             // ex: arg -> "Tom' OR name like 'A%"

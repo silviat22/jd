@@ -35,15 +35,16 @@ public class SimpleSelector {
      * @param args not used
      */
     public static void main(String[] args) {
-        DataSource ds = Config.getDataSource();
+        DataSource ds = Config.getDataSource(); //abbiamo data source
 
-        try (Connection conn = ds.getConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(GET_CODERS)) {
+        try (Connection conn = ds.getConnection(); //abbiamo connessione x andare su database
+                Statement stmt = conn.createStatement(); //creare stmt sulla connection per ottenere una risposta, qui manda la richiesta
+                ResultSet rs = stmt.executeQuery(GET_CODERS)) { //esecuzione query, argomento è stmt
             log.debug("Looping on the result set");
-            System.out.printf("%4s %20s %20s%n", "id", "first", "last");
+            System.out.printf("%4s %20s %20s%n", "id", "first", "last"); //printf=stampa formattata
 
-            while (rs.next()) {
+            while (rs.next()) { //loopare su result set, finchè c'è una riga (next)
+                //dalla riga corrente del result set prendo la prima colonna (1, che sarebbe employee_id)
                 int id = rs.getInt(1);
                 String first = rs.getString(2);
                 String last = rs.getString(3);

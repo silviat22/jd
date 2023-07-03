@@ -6,7 +6,7 @@
 package com.example.jd.s14.dao;
 
 import java.time.LocalDate;
-
+//Java Bean che funge da DTO Data Transfer Object
 public class Coder {
     private long id;
     private String firstName;

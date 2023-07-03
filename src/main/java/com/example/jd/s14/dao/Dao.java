@@ -7,10 +7,10 @@ package com.example.jd.s14.dao;
 
 import java.util.List;
 import java.util.Optional;
+//qui si dichiarano i dati tramite i metodi
+public interface Dao<T> { //interfaccia generica, segnalate da <>, parametrizzata rispetto a un tipo, simile a lista
 
-public interface Dao<T> {
-
-    Optional<T> get(long id);
+    Optional<T> get(long id); //risultato del CoderDao
 
     List<T> getAll();
 
